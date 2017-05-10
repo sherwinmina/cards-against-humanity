@@ -1,0 +1,11 @@
+{
+  "name": "cards_against_humanity",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "./test.js"
+  },
+  "author": "Sherwin Mina",
+  "license": "ISC"
+}
