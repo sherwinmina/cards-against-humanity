@@ -8,5 +8,8 @@
     "start": "node ./server.js`"
   },
   "author": "Sherwin Mina",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "babel-core": "^6.24.1"
+  }
 }
