@@ -1,10 +1,15 @@
 import gulp from "gulp";
 import path from "path";
+import rimraf from "rimraf";
 
 const $ = require("gulp-load-plugins")();
 
+gulp.task("server:clean", cb => {
+  rimraf("./build", () => cb());
+});
+
 gulp.task("server:build", () => {
-  return gulp.src("./src/server/**/*.js")
+	return gulp.src("./src/server/**/*.js")
     .pipe($.changed("./build"))
     .pipe($.sourcemaps.init())
     .pipe($.babel())
