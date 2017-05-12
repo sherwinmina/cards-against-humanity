@@ -11,6 +11,11 @@ class AppComponent {
 	};
 
 }
+function fail() {
+	throw new Error("Blegh");
+}
+
+fail();
 
 switch (blegh) {
 	case 1: 
