@@ -1,7 +1,2 @@
-const blegh = "whoah";
-
-class App {
-  static PropTypes = {
-    blegh: 'whoah'
-  }
-}
+require("souece-map-support").install();
+require("./build/server");
