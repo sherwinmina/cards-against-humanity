@@ -3,3 +3,5 @@ describe("hello", () => {
 		expect(true).toBe(true);
 	});
 });
+
+console.log('hello');
