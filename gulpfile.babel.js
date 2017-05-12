@@ -23,7 +23,7 @@ gulp.task("server:build",
  ));
 
  gulp.task(
-    "server.watch",
+    "server:watch",
      gulp.series(
         "server:build",
         function watchl() {
@@ -31,3 +31,4 @@ gulp.task("server:build",
                 .watch("./src/server/**/*.js", gulp.series("server:build"));
     }
 ));
+
