@@ -31,9 +31,11 @@
     "gulp-sourcemaps": "^2.6.0",
     "gulp-util": "^3.0.8",
     "jasmine": "^2.6.0",
+    "node-sass": "^4.5.2",
     "pug": "^2.0.0-rc.1",
     "rimraf": "^2.6.1",
-    "source-map-support": "^0.4.15"
+    "source-map-support": "^0.4.15",
+    "webpack": "^2.5.1"
   },
   "devDependencies": {
     "babel-register": "^6.24.1"
