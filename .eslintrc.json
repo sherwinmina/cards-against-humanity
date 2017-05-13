@@ -13,7 +13,7 @@
 	"parser": "babel-eslint",
 	"rules": {
 		"indent": [
-			"error",
+			"off",
 			"tab",
 			{"SwitchCase": 1}
 		],
