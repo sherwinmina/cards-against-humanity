@@ -1,6 +1,6 @@
 var path = require("path"),
     _ = require('lodash'),
-    webapack = require('webapack'),
+    webpack = require('webpack'),
     ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const vendor = [ 
@@ -10,8 +10,8 @@ const vendor = [
 function createConfig(isDebug) {
 	const devtool = isDebug ? cheap-module-source-map : null;
   const plugins = [
-      new webapack.optimize.CommonsChunkPlugin("vendor", "vendor.js"),
-      new webapack.DefinrPlugin({
+      new webpack.optimize.CommonsChunkPlugin("vendor", "vendor.js"),
+      new webpack.DefinrPlugin({
         "process.env": {
           NODE_ENV: `"${process.env.NODE_ENV || "development"}"`
         },
@@ -26,7 +26,7 @@ function createConfig(isDebug) {
     json: { test: /\.json$/,loader: "json" },
     css: { test: /\.scss$/, loader: "style!css?sourceMap!sass?sourceMap"},
     files: { test: /\.(png|jpg|jpeg|gif|woff|ttf|eot|svg|woff2)/, loader: "url-loader?limit=5000" }
-  }
+  };
 
   const clientEntry = ["./src/client/client.js"];
   let publicPath = "/build/";
@@ -38,7 +38,7 @@ function createConfig(isDebug) {
   }
 
   return {
-    name: client,
+    name: "client",
     devtool,
     entry: {
       app: clientEntry,
