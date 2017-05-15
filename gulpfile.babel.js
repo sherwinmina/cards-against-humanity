@@ -7,76 +7,72 @@ import webpack from "webpack";
 
 const $ = require("gulp-load-plugins")();
 
-// -------------------------------
+// -----------------------------------
 // Server
-
 gulp.task("server:clean", cb => {
 	rimraf("./build", () => cb());
 });
 
 gulp.task("server:build",
-    gulp.series(
-        "server:clean", 
-        compileServer
-        
- ));
+	gulp.series(
+		"server:clean",
+		compileServer
+	));
 
 gulp.task(
-    "server:watch",
-     gulp.series(
-        "server:build",
-        watchServer
-        
-));
+	"server:watch",
+	gulp.series(
+		"server:build",
+		watchServer
+	));
 
 gulp.task(
-    "server:dev",
-    gulp.series(
-        "server:build",
-        gulp.parallel(
-            watchServer,
-            runServer
-    ) 
-));
+	"server:dev",
+	gulp.series(
+		"server:build",
+		gulp.parallel(
+			watchServer,
+			runServer
+		)
+	));
 
 gulp.task(
-    "server:test",
-    gulp.series(
-        "server:build",
-        testServer
-));
+	"server:test",
+	gulp.series(
+		"server:build",
+		testServer
+	));
 
 gulp.task(
-    "server:test:dev",
-    gulp.series(
-        "server:build",
-        gulp.parallel(
-            watchServer,
-            runServertests
-)));
+	"server:test:dev",
+	gulp.series(
+		"server:build",
+		gulp.parallel(
+			watchServer,
+			runServerTests
+		)));
 
-
-function compileServer(){
+function compileServer() {
 	return gulp.src("./src/server/**/*.js")
-        .pipe($.changed("./build"))
-        .pipe($.sourcemaps.init())
-        .pipe($.babel())
-        .pipe($.sourcemaps.write(".", {}))
-        .pipe($.sourcemaps.write(".",{sourceRoot: path.join(__dirname, "src", "server")}))
-        .pipe(gulp.dest("./build"));
+		.pipe($.changed("./build"))
+		.pipe($.sourcemaps.init())
+		.pipe($.babel())
+		.pipe($.sourcemaps.write(".", {sourceRoot: path.join(__dirname, "src", "server")}))
+		.pipe(gulp.dest("./build"));
 }
 
 function watchServer() {
-	return gulp 
-        .watch("./src/server/**/*.js", gulp.series(compileServer))
-        .on("error", () => {});
+	return gulp
+		.watch("./src/server/**/*.js", gulp.series(compileServer))
+		.on("error", () => {});
 }
 
 function runServer() {
 	return $.nodemon({
 		script: "./server.js",
 		watch: "build",
-		ignore: ["**/__tests"]
+		ignore: ["**/__tests"],
+		exec: "node --debug"
 	});
 }
 
@@ -86,24 +82,22 @@ function testServer(cb) {
 		console.error(stderr);
 
 		if (err) {
-			cb(new $.util.PluginError("testServer", "Tests Failed"));
+			cb(new $.util.PluginError("testServer", "Tests failed"));
 		} else {
 			cb();
 		}
 	});
 }
 
-function runServertests() {
+function runServerTests() {
 	return $.nodemon({
-        script: "./tests.js",
-        watch: "build"
-    });
+		script: "./tests.js",
+		watch: "build"
+	});
 }
 
-
-// ----------------------
+// -----------------------------------
 // Client
-
 const consoleStats = {
 	colors: true,
 	exclude: ["node_modules"],
