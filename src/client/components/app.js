@@ -5,10 +5,14 @@ import React, {Component} from 'react';
 class AppContainer extends Component {
   render()  {
     return (
-      <div>
-        <h1>Hello again from React component</h1>
-      </div>
+      <section>
+        <h1>Hello from React component</h1>
+        <button onClick={this._click.bind(this)}> Please Click </button>
+      </section>
     );
+  }
+  _click() {
+    console.log("clicked");
   }
 }
 
