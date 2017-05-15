@@ -10,7 +10,7 @@ export default function() {
     <Route path="/" component={AppContainer}>
       <IndexRoute components={Lobby}/>
       <Route path="/game/:gameId" components={Game}/>
-      <Redirect from"*" to="/" />
+      <Redirect from="*" to="/" />
     </Route>
   );
 }

@@ -1,6 +1,6 @@
 import './lobby.scss';
  
- import React, { Component } from 'react'
+ import React, { Component } from 'react';
  
  class LobbyContainer extends Component {
    render () {
@@ -25,4 +25,4 @@ import './lobby.scss';
  export default {
    main: LobbyContainer,
    siderbar: LobbySidebar
- }
+ };

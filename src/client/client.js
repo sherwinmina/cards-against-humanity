@@ -10,7 +10,7 @@ import {Router, browserHistory as history} from "react-router";
 function main() {
   const routes = require("./routes").default();
   ReactDOM.render(
-    	<Router history={history}>
+      <Router history={history}>
 				{routes}
 			</Router>,
     document.getElementById("mount"));
