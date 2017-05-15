@@ -5,4 +5,15 @@ import ReactDOM from 'react-dom';
 
 import AppContainer from './components/app';
 
-ReactDOM.render(<AppContainer />, document.getElementById('mount'));
+function main() {
+  const AppContainer = require("./components/app").default;
+  ReactDOM.render(<AppContainer />, document.getElementById('mount'));
+}
+
+main();
+
+if (module.hot) {
+  module.hot.accept("./components/app", () => {
+    main();
+  });
+}

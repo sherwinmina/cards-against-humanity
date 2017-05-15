@@ -6,7 +6,7 @@ class AppContainer extends Component {
   render()  {
     return (
       <div>
-        <h1>Hello from React component</h1>
+        <h1>Hello again from React component</h1>
       </div>
     );
   }
