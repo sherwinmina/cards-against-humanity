@@ -24,5 +24,5 @@ import './lobby.scss';
  
  export default {
    main: LobbyContainer,
-   siderbar: LobbySidebar
+   sidebar: LobbySidebar
  };

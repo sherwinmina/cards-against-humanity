@@ -24,5 +24,5 @@ class GameSidebar extends Component {
 
 export default {
   main: GameContainer,
-  sidebra: GameSidebar
+  sidebar: GameSidebar
 };
