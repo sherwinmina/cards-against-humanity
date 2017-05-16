@@ -6,7 +6,7 @@ import Chat from "./chat";
   constructor(props) {
     super(props);
 
-    this._joinGame = () => {
+    this._joinGame = (game) => {
       console.log(`Join Game ${game.title}`);
     };
 
