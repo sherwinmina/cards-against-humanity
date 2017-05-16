@@ -1,5 +1,6 @@
 import "./chat.scss";
-import React, {Component, PropTypes} from "react";
+import React, {Component} from "react";
+import PropTypes from 'prop-types';
 import {TextInput} from "./controls";
 
 export default class Chat extends Component {

@@ -35,11 +35,10 @@ import Chat from "./chat";
        <div className="c-lobby">
         <GameList games={games} joinGame={this._joinGame} />
         <Chat 
-          messages={messages}
-          opSendMessage={opSendMessage}
-          _sendMessage={this._sendMessage}
-        />
-       </div>
+					messages={messages}
+					opSendMessage={opSendMessage}
+					sendMessage={this._sendMessage} />
+			</div>
      );
    }
  }
