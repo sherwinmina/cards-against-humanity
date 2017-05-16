@@ -12,7 +12,11 @@ import './lobby.scss';
   }
 
    render () {
-    const games = [];
+    const games = [
+      {title: "Game 1", id: 1, players: ["one", "two", "three"]},
+      {title: "Game 2", id: 2, players: ["John", "Joseph", "Mary"]},
+      {title: "Game 3", id: 3, players: ["Jim", "Jake", "Akiko"]}
+    ];
 
      return (
        <div className="c-lobby">
