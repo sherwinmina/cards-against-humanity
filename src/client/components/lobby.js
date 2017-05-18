@@ -50,7 +50,11 @@ import Chat from "./chat";
     super(props);
 
     this._login = () => {
-      console.log("IMPLEMENT LOGIN");
+      this.dispatch(A.dialogSet(A.DIALOG_LOGIN, true));
+    };
+
+    this._createGame = () => {
+      console.log("TODO: CREATE GAME");
     };
   }
 
