@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import * as A from '../actions';
 
 export default class AppStore {
@@ -5,8 +6,16 @@ export default class AppStore {
     this.dialog$ = dispatcher
       .on$(A.DIALOG_SET)
       .scan((stack, action) => {
+        _.remove((stack, {id: action.id}));
 
-      }, []);
+        if (action.isOpen)
+          stack.push({id: action.id, props: action.props});
+
+          return stack;
+      }, [])
+      .publishReplay(1);
+
+      this.dialog$.connect();
   }
 
 }
