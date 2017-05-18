@@ -1,8 +1,8 @@
-import './login.scss';
+import "./login.scss";
 
-import React from 'react';
-import * as A from '../../lib/container';
-import {ContainerBase} from '../../lib/container';
+import React from "react";
+import * as A from "../../actions";
+import {ContainerBase} from "../../lib/component";
 
 class LoginDialog extends ContainerBase {
   render() {

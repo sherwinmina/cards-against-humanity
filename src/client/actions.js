@@ -1,4 +1,4 @@
-export * from '../server/shared/actions';
+export * from "../server/shared/actions";
 
 // ---------------------------------------
 // App Store
