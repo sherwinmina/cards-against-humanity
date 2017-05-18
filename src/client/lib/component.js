@@ -38,4 +38,17 @@ export class ContainerBase extends Component {
 		this._disposeFunctions.push(() => sub.unsubscribe());
 	}
 
+  componentWillUnmount() {
+		this._disposeFunctions.forEach(d => d());
+		this._disposeFunctions = [];
+	}
+
+	dispatch(action) {
+		this.context.services.dispatcher.emit(action);
+	}
+
+	request(action) {
+		this.context.services.dispatcher.request(action);
+	}
+
 }
