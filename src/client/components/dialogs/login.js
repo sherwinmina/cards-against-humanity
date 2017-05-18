@@ -16,3 +16,8 @@ class LoginDialog extends ContainerBase {
     );
   }
 }
+
+export default {
+  id: A.DIALOG_LOGIN,
+  component: LoginDialog
+};
