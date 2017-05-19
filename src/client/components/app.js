@@ -21,7 +21,10 @@ class AppContainer extends ContainerBase {
     });
 
     return (
-      <div className={`c-application`}>
+      <div className={`c-application ${dialogStack.length ? 'dialogs-open' : 'dialogs-closed'}`}>
+        <div className="dialogs">
+          {dialogStack}
+        </div>
         <div className="inner">
           <div className="sidebar">
             {sidebar}
