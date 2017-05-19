@@ -1,7 +1,8 @@
-import './app.scss';
+import "./app.scss";
 
-import React from 'react';
-import {ContainerBase} from '../lib/component';
+import React from "react";
+import * as A from "../actions";
+import {ContainerBase} from "../lib/component";
 import dialogTypes from "./dialogs";
 
 class AppContainer extends ContainerBase {
