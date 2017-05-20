@@ -16,14 +16,36 @@ class LoginDialog extends ContainerBase {
     this._login = (e) => {
       e.preventDefault();
       this.request(A.userLogin(this._username.value));
-
     };
+
+    this.state = {
+      opLogin: {can: true, inProgress: false}
+    }
   }
 
   render() {
+    const {opLogin} = this.state;
+    const disabled = opLogin.inProgress;
+
+
     return (
       <section className='c-login-dialog'>
         <h1>Login</h1>
+        <form onSubmit={this._login} disabled={disabled}>
+          <div className="form-row">
+            <TextInput 
+              placeholder="username"
+              ref={c => this._username = c}
+              disabled={disabled || !opLogin.can}
+            />
+            {!opLogin.error ? null :
+              <p className="error">{opLogin.error}</p>}
+            <div className="submit-row">
+              <button className="m-button good" disabled={disabled || !opLogin.can}>login</button>
+              <button className="m-button close-button" onClick={this.close}>close</button>
+            </div>
+          </div>
+        </form>
         <p>
           Stuff and things!
         </p>
