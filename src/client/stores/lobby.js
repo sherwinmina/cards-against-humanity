@@ -1,7 +1,7 @@
 import {Observable} from 'rxjs';
 import {Validator} from 'shared/validation';
 import {validateMessage} from 'shared/validation/chat';
-
+import {mapOps$} from 'shared/observable';
 import * as A from '../actions';
 
 const defaultView = {
@@ -38,6 +38,11 @@ export default class LobbyStore {
           return;
         }
       }
-    })
+    });
+
+    this.opSendMessage$ = mapOps$(
+      dispatcher.on$(A.LOBBY_SEND_MESSAGE),
+      user.details$.map(u => u.isLoggedIn));
+    )
   }
 }
