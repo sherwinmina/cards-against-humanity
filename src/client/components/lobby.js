@@ -39,30 +39,27 @@ import Chat from "./chat";
   constructor(props) {
     super(props);
 
-    this._login = () => {
-      this.dispatch(A.dialogSet(A.DIALOG_LOGIN, true));
-    };
-
-    this._createGame = () => {
-      console.log("TODO: CREATE GAME");
-    };
+    this._login = () => this.dispatch(A.dialogSet(A.DIALOG_LOGIN, true));
+    this._createGame = () => this.dispatch(A.gameCreate());
   }
 
+  componentWillMount() {
+    const {stores: {user, game}} = this.context;
+    this.subscribe(user.opLogin$, opLogin => this.setState({opLogin}));
+    this.subscribe(game.pCreateGame$, opCreateGame => this.setState({opCreateGame}));
+  }
   
   render () {
-    const canLogin = true;
-    const canCreategame = true;
-    const createGameInProgress = false;
-
+    const {opLogin, opCreateGame} = this.state;
      return (
        <section className="c-lobby-sidebar">
          <div className="m-sidebar-buttons">
-          {!canLogin ? null : 
+          {!opLogin.can ? null : 
             <button className="m-button primary" onClick={this._login}>Login</button>}
-          {!canCreategame ? null :
+          {!opCreateGame.can ? null :
             <button 
               onClick={this._createGame}
-              disabled={createGameInProgress}
+              disabled={opCreateGame.inProgress}
               className="m-button good">
               Create Game
             </button>}
