@@ -8,17 +8,19 @@ import Chat from "./chat";
   constructor(props) {
     super(props);
 
-    this._joinGame = (game) => {
-      console.log(`Join Game ${game.title}`);
-    };
+    this._joinGame = (game) => this.request(A.gameJoin(game.id));
 
-     this._sendMessage = (message) => {
-      console.log(`Sending ${message}`);
-    };
+     this._sendMessage = (message) => this.request(A.lobbySendMessage(message));
+  }
+
+  componentDidMount() {
+    const {stores: {lobby}} = this.context;
+    this.subscribe(lobby.opSendMessage$, opSendMessage => this.setState({opSendMessage}));
+    this.subscribe(lobby.view$, lobby => this.setState({lobby}));
   }
 
   render () {
-    const opSendMessage = {can: true, inProgress: false};
+    const {lobby: {games, messages}, opSendMessage} = this.state;
    
 
      return (

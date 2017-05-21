@@ -20,7 +20,7 @@ class LoginDialog extends ContainerBase {
 
     this.state = {
       opLogin: {can: true, inProgress: false}
-    }
+    };
   }
 
   render() {

@@ -22,11 +22,11 @@ const defaultView = {
 
 
 export default class LobbyStore {
-  constructor({dispatcher}){
+  constructor({dispatcher},user){
     this.view$ = Observable.of(defaultView);
 
     dispatcher.onRequest({
-      [A.LOBBY_JOIN]: action => dispatcher.succeed(action);
+      [A.LOBBY_JOIN]: action => dispatcher.succeed(action),
 
       [A.LOBBY_SEND_MESSAGE]: action => {
         const validator = new Validator();
@@ -43,6 +43,6 @@ export default class LobbyStore {
     this.opSendMessage$ = mapOps$(
       dispatcher.on$(A.LOBBY_SEND_MESSAGE),
       user.details$.map(u => u.isLoggedIn));
-    )
+    
   }
 }

@@ -1,5 +1,5 @@
 import {mapOp$} from "shared/observable";
-import * as A from '../actions';
+import * as A from "../actions";
 
 export default class GameStore {
   constructor({dispatcher}, user) {
