@@ -1,4 +1,5 @@
 import{Observable, BehaviorSubject} from 'rxjs';
+import{validateName} from 'shares/validate/user';
 import * as A from '../actions';
 
 const defaultDeatails = {
@@ -13,6 +14,23 @@ export default class UserStore {
 
     this.details$.subscribe(details => 
       Object.keys(details).forEach(k => this[k] = details[k]));
+
+      dispatcher.onRequest({
+        [A.USER_LOGIN]: (action) => {
+          const validator = validateName(action.name);
+          if (validator.didFail) {
+            dispatcher.fail(action. validator.message);
+            return;
+          }
+
+          dispatcher.succeed(action);
+          this.details$.next({
+            isLoggedIn: true,
+            id: 4432,
+            name: action.name
+          })
+        }
+      });
   }
 
 }
