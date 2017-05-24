@@ -1,5 +1,6 @@
 import{Observable, BehaviorSubject} from 'rxjs';
 import{validateName} from 'shares/validate/user';
+import {mapOp$} from 'shared/observble';
 import * as A from '../actions';
 
 const defaultDeatails = {
@@ -31,6 +32,9 @@ export default class UserStore {
           });
         }
       });
+      
+      this.opLogin$ = mapOp$(
+        dispatcher.on$(A.USER_LOGIN),
+        this.details$.map(details => ! details.isLiggedIn));
   }
-
 }
