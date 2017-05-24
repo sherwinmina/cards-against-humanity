@@ -28,7 +28,7 @@ export default class UserStore {
             isLoggedIn: true,
             id: 4432,
             name: action.name
-          })
+          });
         }
       });
   }
