@@ -24,7 +24,7 @@ class AppContainer extends ContainerBase {
     this.subscribe(
       dispatcher.onSuccess$(A.LOBBY_JOIN),
       () => {
-        if (router.location.path == "/") 
+        if (router.location.pathname == "/") 
           return;
         router.push("/");
       });
