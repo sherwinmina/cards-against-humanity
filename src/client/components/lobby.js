@@ -9,11 +9,10 @@ import Chat from "./chat";
     super(props);
 
     this._joinGame = (game) => this.request(A.gameJoin(game.id));
-
-     this._sendMessage = (message) => this.request(A.lobbySendMessage(message));
+    this._sendMessage = (message) => this.request(A.lobbySendMessage(message));
   }
 
-  componentDidMount() {
+  componentWillMount() {
     const {stores: {lobby}} = this.context;
     this.subscribe(lobby.opSendMessage$, opSendMessage => this.setState({opSendMessage}));
     this.subscribe(lobby.view$, lobby => this.setState({lobby}));
