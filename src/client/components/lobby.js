@@ -42,9 +42,12 @@ import Chat from "./chat";
   }
 
   componentWillMount() {
-    const {stores: {user, game}} = this.context;
+    const {stores: {user, app}} = this.context;
     this.subscribe(user.opLogin$, opLogin => this.setState({opLogin}));
-    this.subscribe(game.pCreateGame$, opCreateGame => this.setState({opCreateGame}));
+    this.subscribe(app.pCreateGame$, opCreateGame => this.setState({opCreateGame}));
+    this.subscribe(app.recconected$, () => this.request(A.lobbyJoin()));
+
+    this.request(A.lobbyJoin());
   }
   
   render () {
