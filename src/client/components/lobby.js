@@ -21,7 +21,6 @@ import Chat from "./chat";
   render () {
     const {lobby: {games, messages}, opSendMessage} = this.state;
    
-
      return (
        <div className="c-lobby">
         <GameList games={games} joinGame={this._joinGame} />
