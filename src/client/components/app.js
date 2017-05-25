@@ -7,8 +7,17 @@ import dialogTypes from "./dialogs";
 
 class AppContainer extends ContainerBase {
   componentWillMount() {
-    const { stores: {app}} = this.context;
+    const { stores: {app}, services: {dispatcher}} = this.context;
     this.subscribe(app.dialogs$, dialogs => this.setState({dialogs}));
+
+    this.subscribe(
+      dispatcher.onSuccess$(A.GAME_JOIN), 
+      action => {
+        const path = `/game/${action.gameId}`;
+        if (path == router.loccation.pathname)
+          return;
+        router.push(path);
+      });
   }
 
   render()  {
