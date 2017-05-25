@@ -8,7 +8,7 @@ export default class GameStore {
     dispatcher.onRequest({
       [A.GAME_CREATE]: action => {
         dispatcher.succeed(action);
-        dispatcher.succeed(A.gameJoin(action.gameId));
+        dispatcher.succeed(A.gameJoin(42));
       },
       [A.GAME_JOIN]: action => dispatcher.succeed(action)
     });
