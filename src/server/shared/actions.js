@@ -40,3 +40,18 @@ export const gameCreate = () => ({type: GAME_CREATE});
 
 export const GAME_JOIN = "GAME_JOIN";
 export const gameJoin = (gameId) => ({type: GAME_JOIN, gameId});
+
+export const GAME_SET_OPTIONS = "GAME_SET_OPTIONS";
+export const gameSetOptions = (gameId, options) => ({type: GAME_SET_OPTIONS, gameId, options});
+
+export const GAME_START = "GAME_START";
+export const gameStart = (gameId) => ({type: GAME_START, gameId});
+
+export const GAME_SELECT_CARD = "GAME_SELECT_CARD";
+export const gameSelectCard = (gameId, cardId) => ({type: GAME_SELECT_CARD, gameId, cardId});
+
+export const GAME_SELECT_STACK = "GAME_SELECT_STACK";
+export const gameSelectStack = (gameId, stackId) => ({type: GAME_SELECT_STACK, gameId, stackId});
+
+export const GAME_SEND_MESSAGE = "GAME_SEND_MESSAGE";
+export const gameSendMessage = (gameId, message) => ({type: GAME_SEND_MESSAGE, gameId, message});
