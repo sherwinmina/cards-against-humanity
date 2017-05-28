@@ -9,17 +9,41 @@ export default class GameSetup extends ContainerBase {
   constructor(props) {
     super(props);
 
-    this._setScoreLimit = (e) => {
-      if (!this.state.opSetOptions.can)
-        return;
+		this._setScoreLimit = (e) => {
+			if (!this.state.opSetOptions.can)
+				return;
 
-      this.request(A.gameSetOptions(this.state.game.id, {
-        ...this.state.game.options,
-        scoreLimit: parseInt(e.target.value)
-      }));  
-    };
- 
-  }
+			this.request(A.gameSetOptions(this.state.game.id, {
+				...this.state.game.options,
+				scoreLimit: parseInt(e.target.value)
+			}));
+		};
+
+		this._toggleSet = (set) => {
+			const {opSetOptions, game: {options, id}} = this.state;
+			if (!opSetOptions.can)
+				return;
+
+			const newSets = set.isSelected
+				? options.sets.filter(setId => setId != set.id)
+				: options.sets.concat(set.id);
+
+			this.request(A.gameSetOptions(id, {
+				...options,
+				sets: newSets
+			}));
+		};
+
+		this._startGame = (e) => {
+			e.preventDefault();
+
+			const {opStart, game: {id}} = this.state;
+			if (!opStart.can)
+				return;
+
+			this.request(A.gameStart(id));
+		};
+  }  
 
   render() {
     return (
