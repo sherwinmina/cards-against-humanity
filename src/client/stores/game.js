@@ -30,8 +30,6 @@ const defaultPlayerView = {
 
 export default class GameStore {
   constructor({dispatcher}, user) {
-    const isLoggedIn$ = user.details$.map(d => d.isLoggedIn);
-
     dispatcher.onRequest({
       [A.GAME_CREATE]: action => {
         dispatcher.succeed(action);
@@ -47,6 +45,8 @@ export default class GameStore {
 
     this.view$ = new BehaviorSubject(defaultView);
 		this.player$ = new BehaviorSubject(defaultPlayerView);
+
+    const isLoggedIn$ = user.details$.map(d => d.isLoggedIn);
 
     this.opCreateGame$ = mapOp$(
       dispatcher.on$(A.GAME_CREATE),
@@ -71,5 +71,16 @@ export default class GameStore {
 				const ourPlayer = _.find(game.players, {id: player.id});
 				return ourPlayer && game.step == A.STEP_CHOOSE_WHITES && ourPlayer.isPlaying;
 			}));    
+
+    this.opSelectStack$ = mapOp$(
+			dispatcher.on$(A.GAME_SELECT_STACK),
+			playerAndGame$.map(([game, player]) => {
+				const ourPlayer = _.find(game.players, {id: player.id});
+				return ourPlayer && game.step == A.STEP_JUDGE_STACKS && ourPlayer.isCzar;
+			}));
+
+		this.opSendMessage$ = mapOp$(
+			dispatcher.on$(A.GAME_SEND_MESSAGE),
+			isLoggedIn$);
   }
 }
