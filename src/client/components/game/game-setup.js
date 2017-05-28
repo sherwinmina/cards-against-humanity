@@ -44,6 +44,14 @@ export default class GameSetup extends ContainerBase {
 			this.request(A.gameStart(id));
 		};
   }  
+  
+	componentWillMount() {
+		const {stores: {app, game}} = this.context;
+		this.subscribe(app.view$.map(v => v.sets), sets => this.setState({sets}));
+		this.subscribe(game.view$, game => this.setState({game}));
+		this.subscribe(game.opSetOptions$, opSetOptions => this.setState({opSetOptions}));
+		this.subscribe(game.opStart$, opStart => this.setState({opStart}));
+	}
 
   render() {
     return (
