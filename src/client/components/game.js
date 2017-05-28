@@ -14,14 +14,17 @@ class GameContainer extends ContainerBase {
 
 
   componentWillMount() {
-    const {stores: {app}} = this.context;
-    const {params} = this.props;
-    const gameId = parseInt(params.gameId);
+		const {stores: {app, game}} = this.context;
+		const {params} = this.props;
+		const gameId = parseInt(params.gameId);
 
-    this.subscribe(app.reconnected, () => this.request(A.gameId));
+		this.subscribe(game.opJoinGame$, opJoinGame => this.setState({opJoinGame}));
+		this.subscribe(game.opSendMessage$, opSendMessage => this.setState({opSendMessage}));
+		this.subscribe(game.view$, game => this.setState({game}));
+		this.subscribe(app.reconnected$, () => this.request(A.gameJoin(gameId)));
 
-    this.request(A.gameJoin(gameId));
-  }
+		this.request(A.gameJoin(gameId));
+	}
 
   render () {
     return (
