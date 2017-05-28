@@ -26,13 +26,34 @@ class GameContainer extends ContainerBase {
 		this.request(A.gameJoin(gameId));
 	}
 
-  render () {
-    return (
-      <div>
-        <p>GAME!</p>
-      </div>
-    );
-  }
+  render() {
+		const {opJoinGame, opSendMessage, game} = this.state;
+		let body = null;
+		let showChat = true;
+
+		if (opJoinGame.inProgress) {
+			body = <section className="notice"><p>Joining game...</p></section>;
+			showChat = false;
+		} else if (opJoinGame.error) {
+			body = <section className="notice error"><p>Cannot join game: {opJoinGame.error}</p></section>;
+			showChat = false;
+		} else if (game.step == A.STEP_DISPOSED) {
+			body = <section className="notice error"><p>Game doesn't exist!</p></section>;
+			showChat = false;
+		} else if (game.step == A.STEP_SETUP) {
+			body = <GameSetup />;
+		} else {
+			body = <GameBoard />;
+		}
+
+		return (
+			<div className="c-game">
+				{body}
+				{!showChat ? null :
+					<Chat messages={game.messages} opSendMessage={opSendMessage} sendMessage={this._sendMessage} />}
+			</div>
+		);
+	}
 }
 
 class GameSidebar extends ContainerBase {
