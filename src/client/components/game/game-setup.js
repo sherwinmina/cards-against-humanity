@@ -54,12 +54,46 @@ export default class GameSetup extends ContainerBase {
 	}
 
   render() {
-    return (
-      <Section className="c-game-setup">
-        GameSetup
-      </Section>
-    );
-  }
+    const {sets, game: {options}, opSetOptions, opStart} = this.state;
+
+		const setList = sets.map(set => ({
+			id: set.id,
+			name: set.name,
+			isSelected: options.sets.includes(set.id)
+		}));
+
+		const disabled = !opSetOptions.can
+			|| opSetOptions.inProgress
+			|| opStart.inProgress;
+
+		const error = opStart.error || opSetOptions.error;
+
+		return (
+			<section className={`c-game-setup ${disabled ? "disabled" : "enabled"}`}>
+				<h1>
+					Game Options
+					{!error ? null :
+						<span className="error">{error}</span>}
+				</h1>
+				<form className="body">
+					<div className="form-row">
+						<label>Score Limit:</label>
+						<select value={options.scoreLimit} onChange={this._setScoreLimit} disabled={disabled}>
+							{_.range(4, 50).map(i => 
+								<option value={i} key={i}>{i}</option>)}
+						</select>
+					</div>
+					<div className="form-row">
+						<label>Sets:</label>
+						<SetList sets={setList} toggleSet={this._toggleSet} />
+					</div>
+					<button className="m-button start-game good" onClick={this._startGame} disabled={disabled}>
+						Start Game
+					</button>
+				</form>
+			</section>
+		);
+	}
 }
 
 function SetList({sets, toggleSet}) {
