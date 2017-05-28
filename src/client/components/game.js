@@ -5,6 +5,14 @@ import * as A from "../actions";
 import {ContainerBase} from "../lib/component";
 
 class GameContainer extends ContainerBase {
+  constructor(props) {
+		super(props);
+
+		this._sendMessage = message => 
+			this.request(A.gameSendMessage(this.state.game.id, message));
+	}
+
+
   componentWillMount() {
     const {stores: {app}} = this.context;
     const {params} = this.props;
