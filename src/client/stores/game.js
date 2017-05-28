@@ -18,6 +18,11 @@ const defaultView = {
     {id: 1, name: "Morgan", score: 0, isCzar: false, isPlaying: false, isWinner: false},
     {id: 1, name: "Nick", score: 0, isCzar: false, isPlaying: false, isWinner: false}
   ], 
+  messages: [
+    {name: "Sherwin", messages: "Aloha"},
+    {name: "Jessica", messages: "Mahalo"},
+    {name: "Laura", messages: "Howdde Yo!"}
+  ],
   round: null, 
   timer: null
 };

@@ -4,6 +4,10 @@ import React from 'react';
 import * as A from "../actions";
 import {ContainerBase} from "../lib/component";
 
+import GameBoard from "./game/game-board";
+import GameSetup from "./game/game-setup";
+import Chat from "./chat";
+
 class GameContainer extends ContainerBase {
   constructor(props) {
 		super(props);
