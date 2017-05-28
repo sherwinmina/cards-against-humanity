@@ -97,5 +97,12 @@ export default class GameSetup extends ContainerBase {
 }
 
 function SetList({sets, toggleSet}) {
-  return <p>SETS</p>;
+	return (
+		<ul className="sets-list">
+			{sets.map(set => 
+				<li key={set.id} className={set.isSelected ? "is-selected" : null} onClick={() => toggleSet(set)}>
+					{set.name}
+				</li>)}
+		</ul>
+	);
 }
