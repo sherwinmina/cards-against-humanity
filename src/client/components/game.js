@@ -59,7 +59,32 @@ class GameSidebar extends ContainerBase {
 }
 
 function PlayerList({players}) {
-  return <p> players.map( p => p.name).join(", ")</p>;
+	return (
+		<ul className="c-player-list">
+			{players.map(player => {
+				const [cls, status] = getPlayerStatus(player);
+				return (
+					<li key={player.id} className={cls}>
+						<div className="details">
+							<div className="name">{player.name}</div>
+							<div className="score">
+								{player.score}
+								{player.score == 1 ? " point" : " points"}
+							</div>
+						</div>
+						<div className="status">{status}</div>
+					</li>
+				);
+			})}
+		</ul>
+	);
+}
+
+function getPlayerStatus({isCzar, isWinner, isPlaying}) {
+	if (isCzar) return ["is-czar", "czar"];
+	if (isWinner) return ["is-winner", "winner!"];
+	if (isPlaying) return ["is-playing", "playing"];
+	return ["", ""];
 }
 
 export default {
