@@ -1,3 +1,4 @@
+import _ from "lodash";
 import {Observable, BehaviorSubject} from 'rxjs';
 import {mapOp$} from "shared/observable";
 import * as A from "../actions";
@@ -21,7 +22,7 @@ const defaultView = {
   timer: null
 };
 
-const defaultPlayerState = {
+const defaultPlayerView = {
   id: 1,
   hand: [],
   stack: null
@@ -44,11 +45,31 @@ export default class GameStore {
       [A.GAME_SEND_MESSAGE]: action => dispatcher.succeed(action)
     });
 
+    this.view$ = new BehaviorSubject(defaultView);
+		this.player$ = new BehaviorSubject(defaultPlayerView);
+
     this.opCreateGame$ = mapOp$(
       dispatcher.on$(A.GAME_CREATE),
       isLoggedIn$);
 
 		this.opJoinGame$ = mapOp$(
 			dispatcher.on$(A.GAME_JOIN));
+
+    this.opSetOptions$ = mapOp$(
+			dispatcher.on$(A.GAME_SET_OPTIONS),
+			isLoggedIn$);
+
+    this.opStart$ = mapOp$(
+			dispatcher.on$(A.GAME_START),
+			isLoggedIn$);
+
+    const playerAndGame$ = Observable.combineLatest(this.view$, this.player$);
+
+    this.opSelectCard$ = mapOp$(
+			dispatcher.on$(A.GAME_SELECT_CARD),
+			playerAndGame$.map(([game, player]) => {
+				const ourPlayer = _.find(game.players, {id: player.id});
+				return ourPlayer && game.step == A.STEP_CHOOSE_WHITES && ourPlayer.isPlaying;
+			}));    
   }
 }
