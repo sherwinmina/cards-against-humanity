@@ -55,3 +55,19 @@ export const gameSelectStack = (gameId, stackId) => ({type: GAME_SELECT_STACK, g
 
 export const GAME_SEND_MESSAGE = "GAME_SEND_MESSAGE";
 export const gameSendMessage = (gameId, message) => ({type: GAME_SEND_MESSAGE, gameId, message});
+
+// -----------------------
+// Game Constants
+export const STEP_SETUP = "STEP_SETUP";
+export const STEP_CHOOSE_WHITES = "STEP_CHOOSE_WHITES";
+export const STEP_JUDGE_STACKS = "STEP_JUDGE_STACKS";
+export const STEP_WAIT = "STEP_WAIT";
+export const STEP_DISPOSED = "STEP_DISPOSED";
+
+export const WAIT_GAME_OVER = "WAIT_GAME_OVER";
+export const WAIT_ROUND_OVER = "WAIT_ROUND_OVER";
+
+export const WAIT_REASON_GAME_FINISHED = "WAIT_REASON_GAME_FINISHED";
+export const WAIT_REASON_TOO_FEW_PLAYERS = "WAIT_REASON_TOO_FEW_PLAYERS";
+export const WAIT_REASON_CZAR_LEFT = "WAIT_REASON_CZAR_LEFT";
+export const WAIT_REASON_ROUND_FINISHED = "WAIT_REASON_ROUND_FINISHED";
