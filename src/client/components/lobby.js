@@ -13,10 +13,13 @@ import Chat from "./chat";
   }
 
   componentWillMount() {
-    const {stores: {lobby}} = this.context;
-    this.subscribe(lobby.opSendMessage$, opSendMessage => this.setState({opSendMessage}));
-    this.subscribe(lobby.view$, lobby => this.setState({lobby}));
-  }
+		const {stores: {lobby, app}} = this.context;
+		this.subscribe(lobby.opSendMessage$, opSendMessage => this.setState({opSendMessage}));
+		this.subscribe(lobby.view$, lobby => this.setState({lobby}));
+		this.subscribe(app.reconnected$, () => this.request(A.lobbyJoin()));
+
+		this.request(A.lobbyJoin());
+	}
 
   render () {
     const {lobby: {games, messages}, opSendMessage} = this.state;
@@ -42,13 +45,10 @@ import Chat from "./chat";
   }
 
   componentWillMount() {
-    const {stores: {user, app}} = this.context;
-    this.subscribe(user.opLogin$, opLogin => this.setState({opLogin}));
-    this.subscribe(app.pCreateGame$, opCreateGame => this.setState({opCreateGame}));
-    this.subscribe(app.recconected$, () => this.request(A.lobbyJoin()));
-
-    this.request(A.lobbyJoin());
-  }
+		const {stores: {user, game}} = this.context;
+		this.subscribe(user.opLogin$, opLogin => this.setState({opLogin}));
+		this.subscribe(game.opCreateGame$, opCreateGame => this.setState({opCreateGame}));
+	}
   
   render () {
     const {opLogin, opCreateGame} = this.state;
