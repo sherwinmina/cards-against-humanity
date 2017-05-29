@@ -1,6 +1,6 @@
-import _ from 'lodash';
-import {Observable} from 'rxjs';
-import * as A from './actions';
+import _ from "lodash";
+import {Observable} from "rxjs";
+import * as A from "./actions";
 
 export class Dispatcher {
 	constructor() {
@@ -9,7 +9,7 @@ export class Dispatcher {
 		this._inEmit = false;
 	}
 
-on(typeOrCallbacks, callback = null, statusFilter = null) {
+	on(typeOrCallbacks, callback = null, statusFilter = null) {
 		if (_.isObject(typeOrCallbacks)) {
 			const unreg = _.map(
 				typeOrCallbacks,
@@ -38,7 +38,6 @@ on(typeOrCallbacks, callback = null, statusFilter = null) {
 			handlers.splice(index, 1);
 		};
 	}
-
 
 	onRequest(typeOrCallbacks, callback = null) {
 		return this.on(typeOrCallbacks, callback, A.STATUS_REQUEST);
