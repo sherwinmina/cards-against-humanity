@@ -13,10 +13,10 @@ const defaultView = {
   },
   players: [
     {id: 1, name: "Sherwin", score: 0, isCzar: false, isPlaying: false, isWinner: false},
-    {id: 1, name: "Jessica", score: 0, isCzar: false, isPlaying: false, isWinner: false},
-    {id: 1, name: "Laura", score: 0, isCzar: false, isPlaying: false, isWinner: false},
-    {id: 1, name: "Morgan", score: 0, isCzar: false, isPlaying: false, isWinner: false},
-    {id: 1, name: "Nick", score: 0, isCzar: false, isPlaying: false, isWinner: false}
+    {id: 2, name: "Jessica", score: 0, isCzar: false, isPlaying: false, isWinner: false},
+    {id: 3, name: "Laura", score: 0, isCzar: false, isPlaying: false, isWinner: false},
+    {id: 4, name: "Morgan", score: 0, isCzar: false, isPlaying: false, isWinner: false},
+    {id: 5, name: "Nick", score: 0, isCzar: false, isPlaying: false, isWinner: false}
   ], 
   messages: [
     {index: 1, name: "Sherwin", messages: "Aloha"},
