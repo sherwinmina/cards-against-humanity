@@ -19,11 +19,23 @@ const defaultView = {
     {id: 1, name: "Nick", score: 0, isCzar: false, isPlaying: false, isWinner: false}
   ], 
   messages: [
-    {name: "Sherwin", messages: "Aloha"},
-    {name: "Jessica", messages: "Mahalo"},
-    {name: "Laura", messages: "Howdde Yo!"}
+    {index: 1, name: "Sherwin", messages: "Aloha"},
+    {index: 2, name: "Jessica", messages: "Mahalo"},
+    {index: 3, name: "Laura", messages: "Howdde Yo!"}
   ],
-  round: null, 
+  round: {
+    blackCard: {
+      id: 1, 
+      text: "Do someting",
+      set: "1ed",
+      whiteCardCount: 3
+    },
+    stacks: [
+      {id: 1, count: 3},
+      {id: 2, count: 1},
+      {id: 3, count: 4}
+    ]
+  }, 
   timer: null
 };
 
