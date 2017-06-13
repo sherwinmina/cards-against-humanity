@@ -25,4 +25,22 @@ export class CardDatabase {
   addSets(sets) {
     _.forOwn(sets, (set, setName) => this.addSets(setName, set));
   }
+
+  add(setName, set) {
+    this._set[setName] = {
+      id: setName,
+      name: set.name,
+      blackCards: set.blackCards.map((card, index) => ({
+        id: `b-${setName}-${index}`,
+        text: card.replace(PLACEHOLDER_REGEX, "______"),
+        set: setName,
+        getWhiteCardCount: getWhiteCardCount(card)
+      })),
+      whiteCards: set.whiteCards.map((card, index) => ({
+        id: `w-${setName}-${index}`,
+        text: card,
+        set: setName,
+      }))
+    };
+  }
 }
