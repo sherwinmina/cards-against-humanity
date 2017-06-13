@@ -43,4 +43,18 @@ export class CardDatabase {
       }))
     };
   }
+
+  generateDecks(setIds = null) {
+    const sets = setIds ? setIds.map(s => this.sets[s]) : _.values(this._sets);
+    if (!sets.length)
+      throw new Error("Cannot generate deck withouth any sets selected");
+
+      const whiteCards = _.flatMap(sets, s => s.whiteCards);
+      shuffle(whiteCards);
+
+      const blackCards = ._flatMap(sets, s=> s.blackCards);
+      shuffle(blackCards);
+
+      return new Deck(whiteCards, blackCards);
+  }
 }
