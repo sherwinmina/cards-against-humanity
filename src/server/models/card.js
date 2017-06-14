@@ -87,5 +87,9 @@ export class Deck {
     }
     return this._blackDeck[this._blackIndex++];
   }
-  
+
+  discardWhiteCards(cards) {
+    this._whiteDiscard.push(...cards);
+  }
+
 }
