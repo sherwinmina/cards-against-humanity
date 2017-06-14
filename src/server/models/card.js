@@ -79,4 +79,13 @@ export class Deck {
 
     return this._whiteDeck.splice(0, count);
   }
+
+  drawBlackCard() {
+    if (this._blackIndex >= this._blackDeck.length) {
+      shuffle(this._blackDeck);
+      this._blackIndex = 0;
+    }
+    return this._blackDeck[this._blackIndex++];
+  }
+  
 }
