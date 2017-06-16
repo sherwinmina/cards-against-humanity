@@ -48,8 +48,12 @@ export class RoomBase {
 
     if (diff != IS_UNCHANGED)
       this.broadcast(A.mergeView(this._viewId, diff, this.id));
-      
+
     this._lastView = newView;
     return diff;
+  }
+
+  _postTick(){
+    
   }
 }
