@@ -21,7 +21,7 @@ export function succeed(action) {
 // Views
 
 export const MERGE_VIEW = "MERGE_VIEW";
-export const mergeView = (view, diff, id = undefined) => ({type: MERGE_VIEW, diff, id});
+export const mergeView = (view, diff, id = undefined) => ({type: MERGE_VIEW, view, diff, id});
 export const setView = (view, data, id = undefined) => mergeView(view, {$set: data}, id);
 
 export const VIEW_APP = "VIEW_APP";
