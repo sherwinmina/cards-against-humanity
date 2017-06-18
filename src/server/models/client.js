@@ -29,7 +29,16 @@ export class Client extends Dispatcher {
     this._installHandlers();
   }
 
+  emit(action) {
+    this._socket.emit("action", action);
+  }
+
+  dispose() {
+    this.onDisposes.forEach(a => a());
+    this._onDisposes = [];
+  }
+
   _installHandlers() {
-    
+
   }
 }
