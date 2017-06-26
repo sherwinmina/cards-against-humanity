@@ -11,7 +11,7 @@ const defaultView = {
 };
 
 export default class AppStore {
-  constructor({dispatcher}) {
+  constructor({dispatcher, socket}) {
 		this.view$ = new BehaviorSubject(defaultView);
 
     this.dialogs$ = dispatcher
@@ -29,7 +29,16 @@ export default class AppStore {
 		
 		this.dialogs$.connect();
 
-		this.connection$ = new BehaviorSubject(A.CONNECTION_CONNECTED);
+		socket.on("connect", () => dispatcher.emit(A.appConnectionReconnected(A.CONNECTION_CONNECTED)));
+		socket.on("reconnecting", () => dispatcher.emit(A.appConnectionReconnected(A.APP_CONNECTION_RECONNECTED)));
+		socket.on("disconnect", () => dispatcher.emit(A.appConnectionReconnected(A.APP_CONNECTION_DISCONNECTED)));
+		socket.on("reconnect", () => dispatcher.emit(A.appConnectionReconnected()));
+
+		this.connection$ = dispatcher
+			.on$(A.APP_CONNECTION_SET)
+			.startWith(socket.connected ? A.CONNECTION_CONNECTED : A.CONNECTION_DISCONNECTED)
+			.publishReplay(1);
+			
 		this.reconnected$ = Observable.empty();
   }
 }
