@@ -38,7 +38,9 @@ export default class AppStore {
 			.on$(A.APP_CONNECTION_SET)
 			.startWith(socket.connected ? A.CONNECTION_CONNECTED : A.CONNECTION_DISCONNECTED)
 			.publishReplay(1);
-			
-		this.reconnected$ = Observable.empty();
+
+		this.connection$.connect();
+		this.reconnected$ = Observable.empty(A.APP_CONNECTION_RECONNECTED).publish();
+		this.reconnected$.connect();
   }
 }
