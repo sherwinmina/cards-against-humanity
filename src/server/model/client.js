@@ -44,6 +44,11 @@ export class Client extends Dispatcher {
     this.LoggedIn = true;
     this.name = name;
     this.emit(A.userDetailsSet(this.details));
+
+    if(this.habdlers)
+      this.handlers.onLogin();
+      
+    return validator;
   }
 
   setHandlers(handlers) {
