@@ -52,7 +52,10 @@ export class Client extends Dispatcher {
 
   _installHandlers() {
     this.onRequest({
-      [A.USER_LOGIN]: 
-    })
+      [A.USER_LOGIN]: (action) => {
+        const validator = this.login(action.name);
+        this.respond(action, validator);
+      }
+    });
   }
 }
