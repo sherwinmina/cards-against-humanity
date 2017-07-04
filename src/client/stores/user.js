@@ -3,7 +3,7 @@ import{validateName} from 'shared/validation/user';
 import {mapOp$} from 'shared/observable';
 import * as A from '../actions';
 
-const defaultDeatails = {
+const defaultDetails = {
   isLoggedIn: false,
   id: null,
   name: null
@@ -11,8 +11,13 @@ const defaultDeatails = {
 
 export default class UserStore {
   constructor({dispatcher}) {
-    this.details$ = new BehaviorSubject(defaultDeatails);
+    this.details$ = dispatcher.on$(A.USER_DETAIL_SET)
+      .map(a => a.details)
+      .startWith(defaultDetails)
+      .publishReplay(1);
 
+    this.details$.connect();
+    
     this.details$.subscribe(details => 
       Object.keys(details).forEach(k => this[k] = details[k]));
 
