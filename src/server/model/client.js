@@ -18,6 +18,7 @@ export class Client extends Dispatcher {
     this.LoggedIn = false;
     this.name = null;
     this.app = app;
+    this.handlers = null;
 
     this._socket = socket;
     this.onDisposes = [];
@@ -45,7 +46,19 @@ export class Client extends Dispatcher {
     this.emit(A.userDetailsSet(this.details));
   }
 
+  setHandlers(handlers) {
+    if (this.handlers)
+      this.handlers.dispose();
+
+    this.handlers = handlers;
+  }
+
   dispose() {
+    if (this.handlers) {
+      this.handlers.dispose();
+      this.handlers = null;
+    }
+
     this.onDisposes.forEach(a => a());
     this._onDisposes = [];
   }
