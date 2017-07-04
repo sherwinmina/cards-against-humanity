@@ -7,7 +7,21 @@ export default class LobbyHandlers extends HandlerBase {
     super(client, lobby) {
       super(client);
 
-      this.inDispose();
+      this.inDispose(
+        lobby.addClient(),
+
+        client.onRequesr(A>LOBBY_SEND_MESSAGE, action => {
+          const validator = validateMessage(action.message);
+          
+          if (validator.didFail) {
+            client.fail(action, validator.message);
+            return;
+          }
+
+          lobby.sendMessage(this.client, action.message);
+        })
+      );
+
     }
   }
 }
