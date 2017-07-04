@@ -4,9 +4,7 @@ import * as A from '../actions';
 import {createView$} from "../lib/stores";
 
 const defaultView = {
-	sets: [
-	
-	]
+	sets: []
 };
 
 export default class AppStore {

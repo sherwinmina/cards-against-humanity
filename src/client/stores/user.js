@@ -4,7 +4,7 @@ import {mapOp$} from 'shared/observable';
 import * as A from '../actions';
 
 const defaultDeatails = {
-  isLiggedIn: false,
+  isLoggedIn: false,
   id: null,
   name: null
 };
