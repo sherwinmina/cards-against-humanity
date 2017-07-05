@@ -1,6 +1,7 @@
 import * as A from '../actions';
 import {Dispatcher} from '../shared/dispatcher';
-
+import LobbyHandlers from "./handlers/lobby";
+import GameHandlers from "./handlers/game";
 import {validateName} from '../shared/validation/user';
 
 export class Client extends Dispatcher {
@@ -47,7 +48,7 @@ export class Client extends Dispatcher {
 
     if(this.habdlers)
       this.handlers.onLogin();
-      
+
     return validator;
   }
 
@@ -69,11 +70,21 @@ export class Client extends Dispatcher {
   }
 
   _installHandlers() {
+    const {lobby} = this.app;
+
     this.onRequest({
       [A.USER_LOGIN]: (action) => {
         const validator = this.login(action.name);
         this.respond(action, validator);
+      },
+
+      [A.LOBBY_JOIN]: (action) => {
+        if (this.handlers instanceof LobbyHandlers) {
+          this.succeed(action);
+          return;
+        }
       }
+
     });
   }
 }
