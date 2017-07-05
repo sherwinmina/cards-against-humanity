@@ -2,40 +2,16 @@ import _ from "lodash";
 import {Observable, BehaviorSubject} from 'rxjs';
 import {mapOp$} from "shared/observable";
 import * as A from "../actions";
+import {createView$} from "../lib/stores";
 
 const defaultView = {
-  id: 42,
-  title: "Sherwin's Game", 
-  step: A.STEP_SETUP,
-  options : {
-    scoreLimit: 5,
-    sets: ["1ed"]
-  },
-  players: [
-    {id: 1, name: "Sherwin", score: 0, isCzar: false, isPlaying: false, isWinner: false},
-    {id: 2, name: "Jessica", score: 0, isCzar: false, isPlaying: false, isWinner: false},
-    {id: 3, name: "Laura", score: 0, isCzar: false, isPlaying: false, isWinner: false},
-    {id: 4, name: "Morgan", score: 0, isCzar: false, isPlaying: false, isWinner: false},
-    {id: 5, name: "Nick", score: 0, isCzar: false, isPlaying: false, isWinner: false}
-  ], 
-  messages: [
-    {index: 1, name: "Sherwin", messages: "Aloha"},
-    {index: 2, name: "Jessica", messages: "Mahalo"},
-    {index: 3, name: "Laura", messages: "Howdde Yo!"}
-  ],
-  round: {
-    blackCard: {
-      id: 1, 
-      text: "Do someting",
-      set: "1ed",
-      whiteCardCount: 3
-    },
-    stacks: [
-      {id: 1, count: 3},
-      {id: 2, count: 1},
-      {id: 3, count: 4}
-    ]
-  }, 
+  id: null,
+  title: null, 
+  step: A.STEP_DISPOSED,
+  options : {},
+  players: [], 
+  messages: [],
+  round: null,
   timer: null
 };
 
