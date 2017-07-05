@@ -18,8 +18,21 @@ export class Lobby extends RoomBase {
     super(A.VIEW_LOBBY);
     this.messages = [];
     this.games = [];
-    this.app = [];
+    this.app = app;
 
     this._nextGameId = 1;
+  }
+
+  sendMessages(client, message) {
+    if (!client.isLogged)
+      throw new Error("Client must be logged in");
+
+      this._tick(() => {
+        this.messages.push({
+          index: this.messages.length + 1,
+          name: client.name,
+          message
+        });
+      });
   }
 }
