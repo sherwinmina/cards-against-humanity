@@ -26,6 +26,8 @@ export default class LobbyStore {
           dispatcher.fail(action, validator.message);
           return;
         }
+
+         socket.emit("action", action);
       }
     });
 
