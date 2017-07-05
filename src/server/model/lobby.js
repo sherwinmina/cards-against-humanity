@@ -13,4 +13,13 @@ export class Lobby extends RoomBase {
       }))
     };
   }
+
+  constructor(app) {
+    super(A.VIEW_LOBBY);
+    this.messages = [];
+    this.games = [];
+    this.app = [];
+
+    this._nextGameId = 1;
+  }
 }
