@@ -83,6 +83,9 @@ export class Client extends Dispatcher {
           this.succeed(action);
           return;
         }
+
+        this.setHandlers(new LobbyHandlers(this, lobby));
+        this.succeed(action);
       }
 
     });
