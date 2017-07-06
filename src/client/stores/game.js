@@ -22,18 +22,16 @@ const defaultPlayerView = {
 };
 
 export default class GameStore {
-  constructor({dispatcher}, user) {
+  constructor({dispatcher, socket}, user) {
+    const passthroughAction = action => socket.emit("action", action);
     dispatcher.onRequest({
-      [A.GAME_CREATE]: action => {
-        dispatcher.succeed(action);
-        dispatcher.succeed(A.gameJoin(42));
-      },
-      [A.GAME_JOIN]: action => dispatcher.succeed(action), 
-      [A.GAME_SET_OPTIONS]: action => dispatcher.succeed(action),
-      [A.GAME_START]: action => dispatcher.succeed(action),
-      [A.GAME_SELECT_CARD]: action => dispatcher.succeed(action),
-      [A.GAME_SELECT_STACK]: action => dispatcher.succeed(action),
-      [A.GAME_SEND_MESSAGE]: action => dispatcher.succeed(action)
+      [A.GAME_CREATE]: passthroughAction,
+      [A.GAME_JOIN]: passthroughAction, 
+      [A.GAME_SET_OPTIONS]: passthroughAction,
+      [A.GAME_START]: passthroughAction,
+      [A.GAME_SELECT_CARD]: passthroughAction,
+      [A.GAME_SELECT_STACK]: passthroughAction,
+      [A.GAME_SEND_MESSAGE]: passthroughAction
     });
 
     this.view$ = new BehaviorSubject(defaultView);
