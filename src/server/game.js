@@ -19,4 +19,21 @@ export class Game extends RoomBase {
       timer: this.timer
     };
   }
+
+  get isDisposed() {
+    return this.step == A.STEP_DISPOSED;
+  }
+
+  constructor(id, title, app) {
+    super(A.VIEW_GAME);
+    this.id = id;
+    this.title = title;
+    this.app = app;
+    this.players = [];
+    this.step = A.STEP_SETUP;
+    this.messages = [];
+    this.round = null;
+    this.options = {};
+  }
+
 }
