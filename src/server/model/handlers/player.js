@@ -32,4 +32,18 @@ export class Player extends RoomBase {
     this.hand = [];
     this._isDisposed = false;
   }
+
+  addPoints(points) {
+    this._tick(() => this.score += points);
+  }
+
+  dispose() {
+    if (this._isDisposed)
+      return;
+    
+    this.hand = [];
+    this._isDisposed = true;
+    this.game.app.dispatcher.emit(A.playerDisposed(this.game.id, this.id));
+    
+  }
 }
