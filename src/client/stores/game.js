@@ -34,8 +34,8 @@ export default class GameStore {
       [A.GAME_SEND_MESSAGE]: passthroughAction
     });
 
-    this.view$ = new BehaviorSubject(defaultView);
-		this.player$ = new BehaviorSubject(defaultPlayerView);
+    this.view$ = createView$(dispatcher, A.VIEW_GAME, defaultView);
+		this.player$ = createView$(dispatcher, A.VIEW_PLAYER, defaultPlayerView);
 
     const isLoggedIn$ = user.details$.map(d => d.isLoggedIn);
 
