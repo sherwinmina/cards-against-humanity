@@ -9,6 +9,27 @@ export class Player extends RoomBase {
       id: this.id,
       hand: this.hand.slice();
       stack: null
-    }
+    };
+  }
+  get summary(){
+    return {
+      id: this.id,
+      name: this.name,
+      score: this.score,
+
+      isCzar: false,
+      isPlaying: false,
+      isWinner: false
+    };
+  }
+
+  constructor(game, id, name) {
+    super(A.VIEW_PLAYER);
+    this.name = name;
+    this.id =id;
+    this.game = game;
+    this.score = 0;
+    this.hand = [];
+    this._isDisposed = false;
   }
 }
